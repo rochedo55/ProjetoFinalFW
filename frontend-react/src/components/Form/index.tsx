@@ -43,24 +43,40 @@ export default function Form({onSubmit}:any){
   const [image_link,setImage_link]=useState('')
   const [error,setError]=useState(false)
 
+  const [error_type,setError_type]=useState('')
+
+
 
   async function addDevice(e:FormEvent){
     e.preventDefault()
     //setDevice({product_name:name,product_description:describe,product_brand:brand})
+    
+    if(name=='' || name.length<=3){
+      setError(true)
+      setError_type('Nome do produto')
+      return console.log('Name vazio')
+    }
+
+    if(describe=='' || describe.length<=15){
+      setError(true)
+      setError_type('Descrição do produto')
+      return console.log('describe vazio')
+    }
+
+    if(brand==''){
+      setError(true)
+      setError_type('Marca')
+      return console.log('describe vazio')
+    }
+
+    
     const res = await api.post('/api/device',{product_name:name,
       product_description:describe,
       product_brand:brand,
       product_image_link:image_link
     })
     console.log(res.data)
-    if(res.data.product_brand[0] == 'The selected product brand is invalid.' || 
-    res.data.product_brand[0] == 'The product brand field is required.'
-    ){
-        //alert("ERRO AO CADASTRAR")
-        setError(true)
-    }else{
-        navigate('/')
-    }
+    navigate('/')
   }
 
   return(
@@ -86,7 +102,7 @@ export default function Form({onSubmit}:any){
           {error ? <Alert status='error'>
   <AlertIcon />
   <AlertTitle>Ops algo deu errado</AlertTitle>
-  <AlertDescription>Verifique o preenchimento dos campos e tente novamente</AlertDescription>
+  <AlertDescription>Verifique o preenchimento dos campo {error_type} e tente novamente</AlertDescription>
 </Alert> : ''}
         </Stack>
         <Box
@@ -97,9 +113,11 @@ export default function Form({onSubmit}:any){
           <Stack spacing={4}>
             <HStack>
               <Box>
-                <FormControl id="firstName" isRequired>
+                <FormControl id="firstName" isRequired={true}>
                   <FormLabel>Nome do produto</FormLabel>
                   <Input type="text"
+                   className="required"
+    
                    name="name" id="name" required
                    value={name} onChange={e=>setName(e.target.value)}
                   />
