@@ -12,7 +12,7 @@ import {Routes} from "react-router"
 import HomePage from './components/HomePage';
 import Form from './components/Form';
 import NavBar from './components/NavBar';
-
+import About from './components/About';
 
 export interface IRouteProps{}
 const MyRoutes:React.FunctionComponent<IRouteProps> = (props)=>{
@@ -23,6 +23,8 @@ const MyRoutes:React.FunctionComponent<IRouteProps> = (props)=>{
        <Routes>
        <Route path='/' element={<HomePage/>}/>
         <Route path='/cadastro' element={<Form/>}/>
+        <Route path='/sobre' element={<About/>}/>
+
         </Routes> 
        
     </Router>

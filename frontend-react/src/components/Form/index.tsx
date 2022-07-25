@@ -102,7 +102,7 @@ export default function Form({onSubmit}:any){
           {error ? <Alert status='error'>
   <AlertIcon />
   <AlertTitle>Ops algo deu errado</AlertTitle>
-  <AlertDescription>Verifique o preenchimento dos campo {error_type} e tente novamente</AlertDescription>
+  <AlertDescription>Verifique o preenchimento do campo <strong>{error_type}</strong>  e tente novamente</AlertDescription>
 </Alert> : ''}
         </Stack>
         <Box

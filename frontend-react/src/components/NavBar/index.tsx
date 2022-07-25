@@ -22,7 +22,7 @@ interface NavLinkInt{
   id:string,
   name:string,
 }
-const Links = [{id:"/",name:"Home"},{id:"/cadastro",name:"Cadastro"}];
+const Links = [{id:"/",name:"Home"},{id:"/cadastro",name:"Cadastro"},{id:"/sobre",name:"Sobre"}];
 
 const NavLink = ({ props }: { props: NavLinkInt }) => (
   <Link
